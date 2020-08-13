@@ -1,1 +1,0 @@
-export {footballReducer as reducer} from './footballReducer'

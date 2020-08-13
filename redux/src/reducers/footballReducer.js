@@ -1,4 +1,4 @@
-import { FETCH_VIDEOS_START, FETCH_VIDEOS_END } from "../actions";
+import { FETCH_VIDEOS_START, FETCH_VIDEOS_END } from "../actions/footballAction";
 
 const initialState = {
   videos: [],
@@ -6,7 +6,7 @@ const initialState = {
   error: "",
 };
 
-export const footballReducer = (state = initialState, action) => {
+function footballReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_VIDEOS_START:
       return {
@@ -23,4 +23,6 @@ export const footballReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
+
+export default footballReducer;

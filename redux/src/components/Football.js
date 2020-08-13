@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-import { fetchVideos } from "../actions";
+import { fetchVideos } from "../actions/footballAction";
 
 const Football = (props) => {
   useEffect(() => {
     props.fetchVideos();
   }, []);
 
+  console.log(props.videos);
   return (
     <section>
-      <h1>Welcome To Daily Higlights!</h1>
+      <h1>Welcome To Football Videos</h1>
       {props.isLoading ? <h4>Loading videos...</h4> : null}
       {props.error ? (
         <p style={{ color: "red" }}>
@@ -18,9 +19,9 @@ const Football = (props) => {
         </p>
       ) : null}
       {props.videos.length > 0 ? (
-        <div>
+        <div style={{ width: "500px", margin: "5px auto" }}>
           {props.videos.map((video) => (
-            <h2 key={video.video_title}>{video.video_name}</h2>
+            <div dangerouslySetInnerHTML={{ __html: video.embed }} />
           ))}
         </div>
       ) : null}
@@ -30,7 +31,7 @@ const Football = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    videos: state.videos,
+    videos: state.videos.slice(0, 4),
     isLoading: state.isLoading,
     error: state.error,
   };
